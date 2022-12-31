@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CommandAPI.Models
 {
-    public class CommandAPI
+    public class Command
     {
         [Key]
         [Required]
@@ -14,7 +14,7 @@ namespace CommandAPI.Models
 
         [Required]
         public string Platform {get; set;}
-
+        
         [Required]
         public string CommandLine {get; set;}
     }
