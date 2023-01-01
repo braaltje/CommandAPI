@@ -1,3 +1,5 @@
+using CommandAPI.Data;
+
 namespace CommandAPI;
 
 public class Program
@@ -7,6 +9,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         //register services here
         builder.Services.AddControllers();
+
+        //register Irepo interface to DI service container
+        builder.Services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
 
         var app = builder.Build();
         //Request Pipeline; register middleware here
