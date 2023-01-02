@@ -14,8 +14,8 @@ public class Program
 
         builder.Services.AddControllers();
 
-        //register Irepo interface to DI service container
-        builder.Services.AddScoped<ICommandAPIRepo, MockCommandAPIRepo>();
+        //register Irepo interface and its concrete class to DI service container
+        builder.Services.AddScoped<ICommandAPIRepo, SqlCommandAPIRepo>();
 
         var app = builder.Build();
         //Request Pipeline; register middleware here
