@@ -1,4 +1,5 @@
 using CommandAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommandAPI;
 
@@ -8,6 +9,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         //register services here
+        builder.Services.AddDbContext<CommandContext>(options => options.UseNpgsql
+        (builder.Configuration.GetConnectionString("PostgreSqlConnection")));
+
         builder.Services.AddControllers();
 
         //register Irepo interface to DI service container
