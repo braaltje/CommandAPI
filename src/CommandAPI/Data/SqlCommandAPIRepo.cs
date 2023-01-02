@@ -1,11 +1,10 @@
-using CommandAPI.Models;
 using System.Linq;
+using CommandAPI.Models;
 
 namespace CommandAPI.Data
 {
     public class SqlCommandAPIRepo : ICommandAPIRepo
     {
-
         private readonly CommandContext _dbContext;
 
         public SqlCommandAPIRepo(CommandContext dbContext)
