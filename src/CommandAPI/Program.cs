@@ -18,12 +18,12 @@ public class Program
         //register services here
         // builder.Services.AddDbContext<CommandContext>(options => options.UseNpgsql(
         //     builder.Configuration.GetConnectionString("PostgreSqlConnection")));     
-        builder.Services.AddDbContext<CommandContext>(options => 
-        {
-            options.UseNpgsql(connection);
-        });
+        builder.Services.AddDbContext<CommandContext>(options => options.UseNpgsql(connection));
         
         builder.Services.AddControllers();
+
+        //AutoMapper
+        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         //register Irepo interface and its concrete class to DI service container
         builder.Services.AddScoped<ICommandAPIRepo, SqlCommandAPIRepo>();
