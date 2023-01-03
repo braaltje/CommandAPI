@@ -14,7 +14,11 @@ namespace CommandAPI.Data
 
         public void CreateCommand(Command cmd)
         {
-            throw new NotImplementedException();
+            if(cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _dbContext.CommandItems.Add(cmd);
         }
 
         public void Delete(Command cmd)
@@ -34,12 +38,13 @@ namespace CommandAPI.Data
 
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            //checks whether and how many changes to the db were detected and returns true when > 0
+            return (_dbContext.SaveChanges() >= 0);
         }
 
         public void UpdateCommand(Command cmd)
         {
-            throw new NotImplementedException();
+            //we don't need to do anything here
         }
     }
 }
