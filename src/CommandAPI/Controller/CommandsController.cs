@@ -61,5 +61,24 @@ namespace CommandAPI.Controllers
                 new {Id = commandReadDto.Id}, commandReadDto);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<CommandUpdateDto> UpdateCommand
+            (int id, CommandUpdateDto commandUpdateDto)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if(commandModelFromRepo == null)
+            {
+                return NotFound();
+            }            
+            _mapper.Map(commandUpdateDto, commandModelFromRepo);
+            
+            //this currently calls an 'empty' method. Put here in case in future the repository's 
+            //implementation of UpdateCommand will be changed so we don't need to update the controller.
+            _repository.UpdateCommand(commandModelFromRepo);            
+            _repository.SaveChanges();
+
+            return NoContent();            
+        }
+
     }
 }
