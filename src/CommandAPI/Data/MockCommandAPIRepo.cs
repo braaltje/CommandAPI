@@ -10,7 +10,7 @@ namespace CommandAPI.Data
             throw new NotImplementedException();
         }
 
-        public void Delete(Command cmd)
+        public void DeleteCommand(Command cmd)
         {
             throw new NotImplementedException();
         }
