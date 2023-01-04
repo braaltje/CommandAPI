@@ -4,6 +4,7 @@ using CommandAPI.Data;
 using CommandAPI.Models;
 using AutoMapper;
 using CommandAPI.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace CommandAPI.Controllers
 {
@@ -78,6 +79,34 @@ namespace CommandAPI.Controllers
             _repository.SaveChanges();
 
             return NoContent();            
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialCommandUpate(int id,
+            JsonPatchDocument<CommandUpdateDto> patchDoc)
+        {
+            //get command model from repo
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if(commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+            //map model from repo to DTO fior the JsonPatchDocument to apply to the DTO object
+            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandModelFromRepo);
+            //apply the provided PatchDocument to the DTO to be updated
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+            //check if the updates are valid by checking the modelstate
+            if(!TryValidateModel(commandToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+            //apply the mapping to the model from the repo
+            _mapper.Map(commandToPatch, commandModelFromRepo);
+            //update repo and save changes
+            _repository.UpdateCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+            //noothing to return for the patch request
+            return NoContent();
         }
 
     }

@@ -1,6 +1,7 @@
 using CommandAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Newtonsoft.Json.Serialization;
 
 namespace CommandAPI;
 
@@ -20,7 +21,8 @@ public class Program
         //     builder.Configuration.GetConnectionString("PostgreSqlConnection")));     
         builder.Services.AddDbContext<CommandContext>(options => options.UseNpgsql(connection));
         
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddNewtonsoftJson(s => 
+            s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
         //AutoMapper
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
