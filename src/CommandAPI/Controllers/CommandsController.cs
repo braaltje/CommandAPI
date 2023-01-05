@@ -47,7 +47,7 @@ namespace CommandAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CommandReadDto> CreateCommand
+        public ActionResult<CommandCreateDto> CreateCommand
             (CommandCreateDto commandCreateDto)
         {
             //create a CreateDto and save to Db
