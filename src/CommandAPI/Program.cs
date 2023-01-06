@@ -33,10 +33,7 @@ public class Program
         var app = builder.Build();
         //Request Pipeline; register middleware here
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => endpoints.MapControllers());
 
         // app.MapGet("/", () => "Hello World!");
 

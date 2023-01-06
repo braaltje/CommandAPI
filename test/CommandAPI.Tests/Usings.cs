@@ -6,3 +6,5 @@ global using CommandAPI.Controllers;
 global using CommandAPI.Data;
 global using Moq;
 global using AutoMapper;
+global using CommandAPI.Profiles;
+global using CommandAPI.Dtos;
