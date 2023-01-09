@@ -83,7 +83,7 @@ namespace CommandAPI.Tests
         }
 
         [Fact]
-        public void GetAllCommands_ReturnsCorrectType_WhenDBHasOneResouirce()
+        public void GetAllCommands_ReturnsCorrectType_WhenDBHasOneResource()
         {
             //arrange
             mockRepo.Setup(repo =>
@@ -145,7 +145,7 @@ namespace CommandAPI.Tests
             //act
             var result = controller.GetCommandById(1);
             //assert
-            Assert.IsType<ActionResult<CommandReadDto>>(result.Result);
+            Assert.IsType<ActionResult<CommandReadDto>>(result);
         }
 
         [Fact]
@@ -198,7 +198,7 @@ namespace CommandAPI.Tests
             //act
             var result = controller.UpdateCommand(1, new CommandUpdateDto{ });
             //assert
-            Assert.IsType<NoContentResult>(result);
+            Assert.IsType<NoContentResult>(result.Result);
         }
 
         [Fact]
@@ -211,7 +211,7 @@ namespace CommandAPI.Tests
             //act
             var result = controller.UpdateCommand(0, new CommandUpdateDto{ });
             //assert
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<NotFoundResult>(result.Result);
         }
 
         [Fact]

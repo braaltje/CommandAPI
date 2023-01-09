@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace CommandAPI.Controllers
 {
+    //need to review comments
+
     [Route("api/[controller]")]
     [ApiController]
     public class CommandsController : ControllerBase
@@ -47,7 +49,7 @@ namespace CommandAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CommandCreateDto> CreateCommand
+        public ActionResult<CommandReadDto> CreateCommand
             (CommandCreateDto commandCreateDto)
         {
             //create a CreateDto and save to Db
